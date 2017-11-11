@@ -9,15 +9,17 @@
 # We are ignoring the --format command, since it breaks the code in the used version. 
 # set -euo pipefail
 
-# echo "NUM of ARGS: $#" >> /home/denis/Projects/phmm-2/hack-proxy.log
-# echo "ARGS: $@" >> /home/denis/Projects/phmm-2/hack-proxy.log
-# echo "PROXY INVOKED ($@)" >> /home/denis/Projects/phmm-2/hack-proxy.log
 MY_PATH="`dirname \"$0\"`"
 LOG_PATH=$MY_PATH/hack-proxy.log 
+CONT_NAME="hack"
 
 if [ "$1" = "start" ]
 then 
-    bash $MY_PATH/start-hack.sh
+    docker rm -f ${CONT_NAME} 2>/dev/null
+    docker run -t -d -v $(pwd):$(pwd) \
+        -u $UID \
+        --name ${CONT_NAME} \
+        codeneric/hack-transpiler
     exit 0
 fi
 
@@ -57,6 +59,3 @@ else
     echo "unhandled command: ($@)" >> $LOG_PATH
 fi
 
-# echo "RES $RES" >> /home/denis/Projects/phmm-2/hack-proxy.log
-# echo "$RES"
-# echo "PROXY ENDED ($@)" >> /home/denis/Projects/phmm-2/hack-proxy.log
