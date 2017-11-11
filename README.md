@@ -7,4 +7,4 @@ You'll want to configure your IDE settings in such a way that it points to this 
 
 ## Note
 - We are ignoring the `--format` command, since it breaks the code in the used Hack version. 
-- The proxy script automatically pulls and starts the `codeneric\hack-transpiler` images, which does not contain the latest Hack version. Actually, it contains a rather old version, since we need it for our own purposes (transpiling Hack to PHP), but you can adjust by simply changing the image name in the script.
+- The proxy script automatically pulls and starts the `codeneric\hack-transpiler` image, which does not contain the latest Hack version. Actually, it contains a rather old version, since we need it for our own purposes (transpiling Hack to PHP), but you can adjust by simply changing the image name in the script.
