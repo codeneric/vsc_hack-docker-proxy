@@ -25,8 +25,6 @@ fi
 
 if [ "$1" = "--format" ]
 then 
-    # echo "ERROR OUT ($@)" >> /home/denis/Projects/phmm-2/hack-proxy.log
-    # echo "PROXY ENDED ($@)" >> /home/denis/Projects/phmm-2/hack-proxy.log
     exit 1
 fi
 
@@ -44,17 +42,10 @@ stdin_required["--auto-complete"]=1
 
 if [ ${stdin_required["$1"]} = 1 ]
 then 
-    # echo "STDIN OPEN ($@)" >> /home/denis/Projects/phmm-2/hack-proxy.log
-    # RES=$( cat - | docker exec -i hack hh_client $@ )
     cat - | docker exec -i hack hh_client $@ 
-    # echo "STDIN CLOSED ($@)" >> /home/denis/Projects/phmm-2/hack-proxy.log
 elif [ ${stdin_required["$1"]} = 0 ]
-then
-    # echo "NO STDIN OPEN ($@)" >> /home/denis/Projects/phmm-2/hack-proxy.log
-    # RES=$( docker exec hack hh_client $@ )
-    
+then    
     docker exec hack hh_client $@ 2>&1
-    # echo "COMMAND DONE ($@)" >> /home/denis/Projects/phmm-2/hack-proxy.log
 else
     echo "unhandled command: ($@)" >> $LOG_PATH
 fi
